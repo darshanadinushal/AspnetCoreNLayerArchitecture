@@ -42,8 +42,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\IEntityMapper.cs" />
+    <Compile Include="Common\IMapper.cs" />
+    <Compile Include="Managers\IDepartmentManager.cs" />
     <Compile Include="Managers\IEmployeeManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\IDepartmentRepository.cs" />
     <Compile Include="Repository\IEmployeeRepository.cs" />
   </ItemGroup>
   <ItemGroup>
