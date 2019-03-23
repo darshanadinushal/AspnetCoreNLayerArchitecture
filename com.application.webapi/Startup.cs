@@ -1,9 +1,13 @@
 ﻿using com.application.business.Managers;
+using com.application.business.Mappers;
+using com.application.business.Wrappers;
 using com.application.contracts.Common;
 using com.application.contracts.Managers;
 using com.application.contracts.Repository;
 using com.application.data;
 using com.application.data.Mappers;
+using com.application.data.Repository;
+using com.application.entities;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -35,15 +39,21 @@ namespace com.application.webapi
         {
             services.AddScoped(_ => new universaldbEntities());
 
+            //Managers
             services.AddScoped<IEmployeeManager, EmployeeManager>();
+            services.AddScoped<IDepartmentManager, DepartmentManager>();
 
-            //services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+            //Repositoty
+            services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+            services.AddScoped<IDepartmentRepository, DepartmentRepository>();
+
+            //Mappers
+            services.AddSingleton<IMapper<EmployeeSaveMapperWrapper, Employee>, EmployeeSaveMapper>();
+
 
             services.AddSingleton<IEntityMapper, EntityMapper>();
-
             services.AddCors();
-
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

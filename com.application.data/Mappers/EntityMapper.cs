@@ -22,7 +22,11 @@ namespace com.application.data.Mappers
         {
             _config = new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<App_T_Employee, Employee>().ReverseMap();
+                cfg.CreateMap<App_T_Employee, Employee>()
+                .ForMember(t => t.DepartmentId, m => m.MapFrom(u => u.App_T_DepartmentId))
+                .ReverseMap();
+
+               
             });
         }
 

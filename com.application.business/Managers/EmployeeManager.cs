@@ -1,4 +1,6 @@
-﻿using com.application.contracts.Managers;
+﻿using com.application.business.Wrappers;
+using com.application.contracts.Common;
+using com.application.contracts.Managers;
 using com.application.contracts.Repository;
 using com.application.entities;
 using System;
@@ -11,11 +13,15 @@ namespace com.application.business.Managers
 {
     public class EmployeeManager : IEmployeeManager
     {
+
+        private readonly IMapper<EmployeeSaveMapperWrapper, Employee> _employeeSaveMapper;
+
         private readonly IEmployeeRepository _employeeRepository;
 
-        public EmployeeManager(IEmployeeRepository employeeRepository)
+        public EmployeeManager(IEmployeeRepository employeeRepository , IMapper<EmployeeSaveMapperWrapper, Employee> employeeSaveMapper)
         {
             _employeeRepository = employeeRepository;
+            _employeeSaveMapper = employeeSaveMapper;
         }
 
         public Employee GetEmployeeById(int id)
@@ -48,6 +54,14 @@ namespace com.application.business.Managers
         {
             try
             {
+                var saveObject = _employeeSaveMapper.Map(new EmployeeSaveMapperWrapper
+                {
+                    Employee = employee,
+                    User = "Admin",
+                    IsEdit = employee.Id == 0 ? false : true,
+
+                });
+
                 return _employeeRepository.Save(employee);
             }
             catch (Exception)
