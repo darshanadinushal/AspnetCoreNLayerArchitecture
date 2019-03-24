@@ -12,6 +12,8 @@ namespace com.application.data
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class universaldbEntities : DbContext
     {
@@ -27,5 +29,10 @@ namespace com.application.data
     
         public virtual DbSet<App_T_Department> App_T_Department { get; set; }
         public virtual DbSet<App_T_Employee> App_T_Employee { get; set; }
+    
+        public virtual ObjectResult<App_SP_EmployeeGet_Result> App_SP_EmployeeGet()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<App_SP_EmployeeGet_Result>("App_SP_EmployeeGet");
+        }
     }
 }

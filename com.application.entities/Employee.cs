@@ -23,6 +23,8 @@ namespace com.application.entities
 
         public string MobileNo { get; set; }
 
-       
+        public string DepartmentName { get; set; }
+
+
     }
 }

@@ -57,6 +57,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_SP_EmployeeGet_Result.cs">
+      <DependentUpon>UniversalDBModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="App_T_Department.cs">
       <DependentUpon>UniversalDBModel.tt</DependentUpon>
     </Compile>

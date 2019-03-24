@@ -41,9 +41,9 @@ namespace com.application.data.Repository
         {
             try
             {
-                var returnObj = _universalEntities.App_T_Employee.ToList();
+                var returnObj = _universalEntities.App_SP_EmployeeGet().ToList();
 
-                return _entityMapper.Map<IList<App_T_Employee>, List<Employee>>(returnObj);
+                return _entityMapper.Map<IList<App_SP_EmployeeGet_Result>, List<Employee>>(returnObj);
             }
             catch (Exception)
             {
