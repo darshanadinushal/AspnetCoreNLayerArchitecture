@@ -12,6 +12,10 @@
 /com.application.entities/obj
 /com.application.webapi/bin/Debug
 /com.application.webapi/obj
+/com.application.common/bin/Debug
+/com.application.common/obj
+/com.application.common/bin/Debug
+/com.application.common/obj
 /.vs
 .vs/ApplicationBackEnd/v15/.suo
 ApplicationBackEnd.v12.suo
