@@ -42,7 +42,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\IEntityMapper.cs" />
+    <Compile Include="Common\IErrorMessages.cs" />
     <Compile Include="Common\IMapper.cs" />
+    <Compile Include="Common\IValidator.cs" />
     <Compile Include="Managers\IDepartmentManager.cs" />
     <Compile Include="Managers\IEmployeeManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

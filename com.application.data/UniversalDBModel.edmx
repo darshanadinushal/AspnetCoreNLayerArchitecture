@@ -21,7 +21,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="App_T_DepartmentId" Type="int" Nullable="false" />
           <Property Name="FirstName" Type="nvarchar" MaxLength="256" Nullable="false" />
           <Property Name="LastName" Type="nvarchar" MaxLength="256" />

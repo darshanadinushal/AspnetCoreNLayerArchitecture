@@ -11,6 +11,8 @@ namespace com.application.contracts.Repository
     {
         IEnumerable<Employee> GetEmployees();
 
+        bool IsEmailReferenceExists(Employee employee, bool isUpdate);
+
         Employee Save(Employee employee);
 
         Employee GetEmployeeById(int id);

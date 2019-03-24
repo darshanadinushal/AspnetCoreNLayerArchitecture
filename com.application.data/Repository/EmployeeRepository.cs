@@ -53,6 +53,28 @@ namespace com.application.data.Repository
       
         }
 
+        public bool IsEmailReferenceExists(Employee employee ,bool isUpdate)
+        {
+            try
+            {
+                if (!isUpdate && employee!=null)
+                {
+                    var returnObj = _universalEntities.App_T_Employee.Where(x=>x.Email== employee.Email).FirstOrDefault();
+
+                    if (returnObj!=null)
+                    {
+                        return true;
+                    }
+                }
+                return false;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public Employee Save(Employee employee)
         {
             try

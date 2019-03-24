@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using com.application.contracts.Managers;
 using com.application.entities;
+using com.application.entities.Common;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -20,7 +21,7 @@ namespace com.application.webapi.Controllers
 
         // GET: api/<controller>
         [HttpGet]
-        public IEnumerable<Employee> Get()
+        public ServiceResponse Get()
         {
             try
             {
@@ -37,14 +38,14 @@ namespace com.application.webapi.Controllers
 
         // GET api/<controller>/5
         [HttpGet("{id}")]
-        public Employee Get(int id)
+        public ServiceResponse Get(int id)
         {
             return _employeeManager.GetEmployeeById(id);
         }
 
         // POST api/<controller>
         [HttpPost]
-        public Employee Post([FromBody]Employee employee)
+        public ServiceResponse Post([FromBody]Employee employee)
         {
             try
             {

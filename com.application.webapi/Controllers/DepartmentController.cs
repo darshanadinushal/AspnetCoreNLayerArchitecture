@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using com.application.contracts.Managers;
 using com.application.entities;
+using com.application.entities.Common;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -24,7 +25,7 @@ namespace com.application.webapi.Controllers
 
         // GET: api/<controller>
         [HttpGet]
-        public IEnumerable<Department> Get()
+        public ServiceResponse Get()
         {
             try
             {

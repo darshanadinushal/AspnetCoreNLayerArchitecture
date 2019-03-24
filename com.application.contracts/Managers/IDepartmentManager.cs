@@ -1,4 +1,5 @@
 ﻿using com.application.entities;
+using com.application.entities.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,6 @@ namespace com.application.contracts.Managers
 {
     public interface IDepartmentManager
     {
-        IEnumerable<Department> GetDepartmentList();
+        ServiceResponse GetDepartmentList();
     }
 }
