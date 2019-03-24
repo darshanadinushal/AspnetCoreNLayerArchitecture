@@ -22,10 +22,7 @@ namespace com.application.business.Mappers
                 {
                     input.Employee.IsActive = input.Employee.IsActive;
                     input.Employee.UpdatedBy = input.User;
-                    input.Employee.UpdatedDate = currentDate;
-                    input.Employee.UpdatedBy = input.User;
-                    input.Employee.UpdatedDate = currentDate;
-                }
+                    input.Employee.UpdatedDate = currentDate;                }
                 else
                 {
                     input.Employee.IsActive = true;

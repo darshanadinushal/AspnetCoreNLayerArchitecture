@@ -71,5 +71,6 @@
     <Build Include="schema.sql" />
     <Build Include="Tables\App_T_Employee.sql" />
     <Build Include="Tables\App_T_Department.sql" />
+    <Build Include="StoredProcedures\App_SP_EmployeeGet.sql" />
   </ItemGroup>
 </Project>

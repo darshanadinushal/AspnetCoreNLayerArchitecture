@@ -13,9 +13,11 @@
 
   <ItemGroup>
     <ProjectReference Include="..\com.application.business\com.application.business.csproj" />
+    <ProjectReference Include="..\com.application.common\com.application.common.csproj" />
     <ProjectReference Include="..\com.application.contracts\com.application.contracts.csproj" />
     <ProjectReference Include="..\com.application.data\com.application.data.csproj" />
     <ProjectReference Include="..\com.application.entities\com.application.entities.csproj" />
+    <ProjectReference Include="..\com.application.resources\com.application.resources.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,6 +1,8 @@
 ﻿using com.application.business.Managers;
 using com.application.business.Mappers;
+using com.application.business.Validators;
 using com.application.business.Wrappers;
+using com.application.common.Mappers;
 using com.application.contracts.Common;
 using com.application.contracts.Managers;
 using com.application.contracts.Repository;
@@ -8,11 +10,14 @@ using com.application.data;
 using com.application.data.Mappers;
 using com.application.data.Repository;
 using com.application.entities;
+using com.application.entities.Common;
+using com.application.resources;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System;
+using System.Collections.Generic;
 
 namespace com.application.webapi
 {
@@ -50,8 +55,15 @@ namespace com.application.webapi
             //Mappers
             services.AddSingleton<IMapper<EmployeeSaveMapperWrapper, Employee>, EmployeeSaveMapper>();
 
+            //Validator
+            services.AddScoped<IValidator<EmployeeSaveValidatorWrapper>, EmployeeSaveValidator>();
 
             services.AddSingleton<IEntityMapper, EntityMapper>();
+            services.AddSingleton<IErrorMessages, ErrorMessages>();
+           
+            services.AddSingleton<IMapper<IList<Message>, ServiceResponse>, ServiceErrorMapper>();
+            services.AddSingleton<IMapper<Object, ServiceResponse>, ServiceResponseMapper>();
+           
             services.AddCors();
             services.AddMvc();
         }

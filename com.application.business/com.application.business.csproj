@@ -52,7 +52,9 @@
     <Compile Include="Managers\EmployeeManager.cs" />
     <Compile Include="Mappers\EmployeeSaveMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Validators\EmployeeSaveValidator.cs" />
     <Compile Include="Wrappers\EmployeeSaveMapperWrapper.cs" />
+    <Compile Include="Wrappers\EmployeeSaveValidatorWrapper.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\com.application.contracts\com.application.contracts.csproj">

@@ -3,6 +3,7 @@ using com.application.contracts.Common;
 using com.application.contracts.Managers;
 using com.application.contracts.Repository;
 using com.application.entities;
+using com.application.entities.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,17 +19,30 @@ namespace com.application.business.Managers
 
         private readonly IEmployeeRepository _employeeRepository;
 
-        public EmployeeManager(IEmployeeRepository employeeRepository , IMapper<EmployeeSaveMapperWrapper, Employee> employeeSaveMapper)
+        private readonly IValidator<EmployeeSaveValidatorWrapper> _employeeValidator;
+
+        private readonly IMapper<IList<Message>, ServiceResponse> _serviceResponseErrorMapper;
+
+        private readonly IMapper<Object, ServiceResponse> _serviceResponseMapper;
+
+        public EmployeeManager(IEmployeeRepository employeeRepository , IMapper<EmployeeSaveMapperWrapper, Employee> employeeSaveMapper
+            ,IValidator<EmployeeSaveValidatorWrapper> employeeValidator , IMapper<IList<Message>, ServiceResponse> serviceResponseErrorMapper,
+            IMapper<Object, ServiceResponse> serviceResponseMapper)
         {
             _employeeRepository = employeeRepository;
             _employeeSaveMapper = employeeSaveMapper;
+            _employeeValidator = employeeValidator;
+            _serviceResponseMapper = serviceResponseMapper;
+            _serviceResponseErrorMapper = serviceResponseErrorMapper;
         }
 
-        public Employee GetEmployeeById(int id)
+        public ServiceResponse GetEmployeeById(int id)
         {
             try
             {
-                return _employeeRepository.GetEmployeeById(id);
+                var returnObject= _employeeRepository.GetEmployeeById(id);
+
+                return _serviceResponseMapper.Map(returnObject);
             }
             catch (Exception)
             {
@@ -36,11 +50,13 @@ namespace com.application.business.Managers
             }
         }
 
-        public IEnumerable<Employee> GetEmployeeList()
+        public ServiceResponse GetEmployeeList()
         {
             try
             {
-                return _employeeRepository.GetEmployees();
+                var returnObject= _employeeRepository.GetEmployees();
+
+                return _serviceResponseMapper.Map(returnObject);
             }
             catch (Exception)
             {
@@ -50,10 +66,25 @@ namespace com.application.business.Managers
            
         }
 
-        public Employee Save(Employee employee)
+        public ServiceResponse Save(Employee employee)
         {
             try
             {
+                var isEdit = employee.Id == 0 ? false : true;
+
+                //validation
+                if (!_employeeValidator.Validate(
+                    new EmployeeSaveValidatorWrapper
+                    {
+                        Request = employee,
+                        IsEmailReferenceExists = _employeeRepository.IsEmailReferenceExists(employee, isEdit)
+                    }
+                    , out IList<Message> messages))
+                {
+                    return _serviceResponseErrorMapper.Map(messages);
+                }
+
+
                 var saveObject = _employeeSaveMapper.Map(new EmployeeSaveMapperWrapper
                 {
                     Employee = employee,
@@ -62,7 +93,10 @@ namespace com.application.business.Managers
 
                 });
 
-                return _employeeRepository.Save(employee);
+               
+                var returnObject= _employeeRepository.Save(employee);
+
+                return _serviceResponseMapper.Map(returnObject);
             }
             catch (Exception)
             {

@@ -1,4 +1,5 @@
 ﻿using com.application.entities;
+using com.application.entities.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,9 +10,10 @@ namespace com.application.contracts.Managers
 {
     public interface IEmployeeManager
     {
-        IEnumerable<Employee> GetEmployeeList();
-        Employee Save(Employee employee);
+        ServiceResponse GetEmployeeList();
 
-        Employee GetEmployeeById(int id);
+        ServiceResponse Save(Employee employee);
+
+        ServiceResponse GetEmployeeById(int id);
     }
 }

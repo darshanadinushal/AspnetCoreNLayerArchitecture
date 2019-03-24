@@ -41,9 +41,9 @@ namespace com.application.data.Repository
         {
             try
             {
-                var returnObj = _universalEntities.App_T_Employee.ToList();
+                var returnObj = _universalEntities.App_SP_EmployeeGet().ToList();
 
-                return _entityMapper.Map<IList<App_T_Employee>, List<Employee>>(returnObj);
+                return _entityMapper.Map<IList<App_SP_EmployeeGet_Result>, List<Employee>>(returnObj);
             }
             catch (Exception)
             {
@@ -51,6 +51,28 @@ namespace com.application.data.Repository
                 throw;
             }
       
+        }
+
+        public bool IsEmailReferenceExists(Employee employee ,bool isUpdate)
+        {
+            try
+            {
+                if (!isUpdate && employee!=null)
+                {
+                    var returnObj = _universalEntities.App_T_Employee.Where(x=>x.Email== employee.Email).FirstOrDefault();
+
+                    if (returnObj!=null)
+                    {
+                        return true;
+                    }
+                }
+                return false;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         public Employee Save(Employee employee)

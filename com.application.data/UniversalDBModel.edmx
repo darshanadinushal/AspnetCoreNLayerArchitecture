@@ -21,7 +21,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="App_T_DepartmentId" Type="int" Nullable="false" />
           <Property Name="FirstName" Type="nvarchar" MaxLength="256" Nullable="false" />
           <Property Name="LastName" Type="nvarchar" MaxLength="256" />
@@ -46,6 +46,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="App_SP_EmployeeGet" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="com" />
         <EntityContainer Name="universaldbModelStoreContainer">
           <EntitySet Name="App_T_Department" EntityType="Self.App_T_Department" Schema="com" store:Type="Tables" />
           <EntitySet Name="App_T_Employee" EntityType="Self.App_T_Employee" Schema="com" store:Type="Tables" />
@@ -108,7 +109,19 @@
             <End Role="App_T_Department" EntitySet="App_T_Department" />
             <End Role="App_T_Employee" EntitySet="App_T_Employee" />
           </AssociationSet>
+          <FunctionImport Name="App_SP_EmployeeGet" ReturnType="Collection(universaldbModel.App_SP_EmployeeGet_Result)" />
         </EntityContainer>
+        <ComplexType Name="App_SP_EmployeeGet_Result">
+          <Property Type="Int32" Name="EmployeeId" Nullable="true" />
+          <Property Type="String" Name="FirstName" Nullable="true" MaxLength="256" />
+          <Property Type="String" Name="LastName" Nullable="true" MaxLength="256" />
+          <Property Type="String" Name="Address" Nullable="true" MaxLength="512" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="256" />
+          <Property Type="String" Name="MobileNo" Nullable="true" MaxLength="12" />
+          <Property Type="Boolean" Name="IsActive" Nullable="true" />
+          <Property Type="Int32" Name="DepartmentId" Nullable="true" />
+          <Property Type="String" Name="DepartmentName" Nullable="true" MaxLength="256" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -146,6 +159,21 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="App_SP_EmployeeGet" FunctionName="universaldbModel.Store.App_SP_EmployeeGet">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="universaldbModel.App_SP_EmployeeGet_Result">
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+                <ScalarProperty Name="DepartmentName" ColumnName="DepartmentName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

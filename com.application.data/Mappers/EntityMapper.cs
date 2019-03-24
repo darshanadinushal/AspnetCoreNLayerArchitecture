@@ -26,7 +26,11 @@ namespace com.application.data.Mappers
                 .ForMember(t => t.DepartmentId, m => m.MapFrom(u => u.App_T_DepartmentId))
                 .ReverseMap();
 
-               
+
+                cfg.CreateMap<App_SP_EmployeeGet_Result, Employee>()
+               .ForMember(t => t.Id, m => m.MapFrom(u => u.EmployeeId))
+               .ReverseMap();
+
             });
         }
 
